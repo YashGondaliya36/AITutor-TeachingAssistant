@@ -13,7 +13,7 @@
 [![React](https://img.shields.io/badge/React-18+-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org)
 [![Pinecone](https://img.shields.io/badge/Pinecone-Vector%20DB-00B4A6?style=for-the-badge)](https://pinecone.io)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://mongodb.com)
-[![Google AI](https://img.shields.io/badge/Google-Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://deepmind.google/technologies/gemini/)
+[![Google AI](https://img.shields.io/badge/Google-Multimodal%20LLM-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google)
 
 </div>
 
@@ -72,7 +72,7 @@ The Teaching Assistant module is composed of **four interconnected subsystems**,
 
 ## 🗣️ Speech-to-Speech — Live Voice Tutoring
 
-The frontend is built on the **Google Multimodal Live API** — a real-time, low-latency, bidirectional speech model capable of sustained conversation with camera awareness and screen sharing.
+The frontend is built on a real-time, low-latency, bidirectional speech-to-speech connection — capable of sustained multimodal conversation with camera awareness and screen sharing.
 
 ### How It Works
 
@@ -116,7 +116,7 @@ Every 3 conversation turns
          ▼
 ┌──────────────────────────────────────────────┐
 │              MemoryExtractor                  │
-│  (Gemini Flash-Lite, single batch LLM call)  │
+│  (Multimodal LLM, single-batch extraction)   │
 │                                              │
 │  Input:  3 exchanges (user + Adam turns)     │
 │  Output: memories[], emotions[], moments[],  │
@@ -177,7 +177,7 @@ Retrieved Memories + Conversation Context
               ▼
     ┌─────────────────────┐
     │  Reflection Layer   │
-    │  (Gemini Flash-Lite)│
+    │   (Multimodal LLM)  │
     └─────────────────────┘
               │
     ┌─────────┴─────────┐
@@ -351,7 +351,7 @@ Beyond conversation, the module tracks rich session signals:
 | Signal | How |
 |--------|-----|
 | **Screen activity** | Frontend WebRTC screen capture → WebSocket → Event pipeline |
-| **Camera feed** | Browser `getUserMedia` → multimodal stream → Gemini Live API |
+| **Camera feed** | Browser `getUserMedia` → multimodal stream → Multimodal Live API |
 | **Conversation turns** | Transcript via WebSocket → ContextManager → MongoDB |
 | **Inactivity** | SessionMonitor checks last activity timestamp, triggers re-engagement prompts |
 | **Credit consumption** | CostTracker middleware wraps all LLM calls; per-session token accounting |
@@ -399,7 +399,7 @@ Use `--clean` to wipe a user's Pinecone index before starting fresh.
 - Node.js 18+
 - MongoDB Atlas URI
 - Pinecone API Key + Project
-- Google AI (Gemini) API Key
+- Google AI (Multimodal LLM) API Key
 
 ### 1. Configure Environment
 
