@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  # Redis for caching (Phase 4)
+  redis:
+    image: redis:7-alpine
+    container_name: ai_tutor_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    restart: unless-stopped
+
+  # Frontend (Production)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ai_tutor_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  # Teaching Assistant API
+  teaching_assistant:
+    build:
+      context: ./services/TeachingAssistant
+      dockerfile: Dockerfile
+    container_name: ai_tutor_teaching_assistant
+    ports:
+      - "8002:8002"
+    environment:
+      - PORT=8002
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Tutor Service (WebSocket)
+  tutor:
+    build:
+      context: ./services/Tutor
+      dockerfile: Dockerfile
+    container_name: ai_tutor_tutor
+    ports:
+      - "8767:8767"
+    environment:
+      - PORT=8767
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+    driver: local
+
+networks:
+  default:
+    name: ai_tutor_network

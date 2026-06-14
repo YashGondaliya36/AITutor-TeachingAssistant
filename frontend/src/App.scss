@@ -1,0 +1,335 @@
+:root {
+  // Web 1.0 Neo-Brutalism Color Palette
+  --neo-black: #000000;
+  --neo-white: #FFFFFF;
+  --neo-yellow: #FFD93D; // Vivid Yellow
+  --neo-red: #FF6B6B; // Hot Red
+  --neo-violet: #C4B5FD; // Soft Violet
+  --neo-bg: #FFFDF5; // Cream background (aged paper)
+
+  // Legacy color mappings for backward compatibility
+  --neo-cyan: #C4B5FD; // Map cyan to violet
+  --neo-pink: #FF6B6B; // Map pink to red
+  --neo-lime: #FFD93D; // Map lime to yellow
+  --neo-orange: #FF6B6B; // Map orange to red
+
+  // Neo-Brutalism Borders & Shadows
+  --neo-border-width: 5px;
+  --neo-border: 5px solid var(--neo-black);
+  --neo-shadow: 3px 3px 0 var(--neo-black);
+  --neo-shadow-hover: 4px 4px 0 var(--neo-black);
+  --neo-shadow-small: 2px 2px 0 var(--neo-black);
+
+  // Legacy variables (keeping for compatibility)
+  --text: var(--neo-black);
+  --gray-200: #b4b8bb;
+  --gray-300: #80868b;
+  --gray-500: #5f6368;
+  --gray-600: #444444;
+  --gray-700: #202020;
+  --gray-800: #171717;
+  --gray-900: #111111;
+  --gray-1000: #0a0a0a;
+  --border-stroke: var(--neo-black);
+  --accent-blue: var(--neo-cyan);
+  --accent-blue-active-bg: #001233;
+  --accent-blue-active: var(--neo-cyan);
+  --accent-blue-headers: var(--neo-cyan);
+  --accent-green: var(--neo-lime);
+
+  --midnight-blue: rgb(0, 18, 51);
+  --blue-30: var(--neo-cyan);
+
+  --accent-red: var(--neo-pink);
+
+  --color: var(--text);
+
+  scrollbar-color: var(--neo-black) var(--neo-bg);
+  scrollbar-width: thin;
+
+  --font-family: "Space Mono", monospace;
+
+  /* Neutral palette mapped to neo-brutalism */
+  --Neutral-00: var(--neo-black);
+  --Neutral-5: #181a1b;
+  --Neutral-10: #1c1f21;
+  --Neutral-15: #232729;
+  --Neutral-20: #2a2f31;
+  --Neutral-30: #404547;
+  --Neutral-50: #707577;
+  --Neutral-60: #888d8f;
+  --Neutral-80: #c3c6c7;
+  --Neutral-90: #e1e2e3;
+
+  --Green-500: var(--neo-lime);
+  --Green-700: #025022;
+
+  --Blue-400: var(--neo-cyan);
+  --Blue-500: var(--neo-cyan);
+  --Blue-800: #0f3557;
+
+  --Red-400: var(--neo-pink);
+  --Red-500: var(--neo-pink);
+  --Red-600: var(--neo-pink);
+  --Red-700: #bd3000;
+}
+
+// Dark mode overrides - multiple selectors for maximum compatibility
+.dark,
+html.dark,
+:root.dark {
+  --neo-bg: #000000; // Black background in dark mode
+  --neo-black: #FFFFFF; // White text/borders in dark mode
+  --text: var(--neo-black); // Inherit white color
+  --border-stroke: var(--neo-black); // White borders
+  --Neutral-00: var(--neo-black); // White in dark mode
+  
+  // Update scrollbar colors for dark mode
+  scrollbar-color: var(--neo-black) var(--neo-bg);
+}
+
+body {
+  font-family: "Space Mono", monospace;
+  background: var(--neo-bg);
+  color: var(--neo-black);
+  font-size: 11px; // Much smaller base for better fit
+  font-weight: 700; // Bold typography for Web 1.0 aesthetic
+
+  // Responsive scaling - only increase on very large screens
+  @media (min-width: 2560px) {
+    font-size: 14px; // 4K displays
+  }
+
+  @media (min-width: 1920px) {
+    font-size: 13px; // Full HD
+  }
+
+  @media (min-width: 1440px) and (max-width: 1919px) {
+    font-size: 12px; // Standard large laptop
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 11px; // Tablets
+  }
+
+  @media (max-width: 768px) {
+    font-size: 10px; // Mobile
+  }
+}
+
+.material-symbols-outlined {
+  &.filled {
+    font-variation-settings:
+      "FILL" 1,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 24;
+  }
+}
+
+.space-mono-regular {
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.space-mono-bold {
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.space-mono-regular-italic {
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.space-mono-bold-italic {
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.hidden {
+  display: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.h-screen-full {
+  height: 100vh;
+}
+
+.w-screen-full {
+  width: 100vw;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+}
+
+.streaming-console {
+  color: var(--neo-black);
+  display: flex;
+  height: calc(100vh - 48px); // Reduced from 56px
+  width: 100vw;
+  margin-top: 48px; // Reduced from 56px
+  position: relative;
+  background: var(--neo-bg);
+  overflow-y: auto; // Enable scrolling when content exceeds viewport
+  overflow-x: hidden;
+
+  // Responsive layout
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: calc(100vh - 44px); // Reduced from 50px
+    margin-top: 44px;
+  }
+}
+
+  a,
+  a:visited,
+  a:active {
+    color: var(--neo-black);
+  }
+
+  .disabled {
+    pointer-events: none;
+
+    > * {
+      pointer-events: none;
+    }
+  }
+
+  main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    gap: 0.75rem;
+    width: 100%;
+    overflow: visible; // Allow content to flow so parent can scroll
+    transition: margin-right 300ms ease-in-out, margin-left 300ms ease-in-out;
+    background: var(--neo-bg);
+
+    @media (max-width: 768px) {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+  }
+
+  .main-app-area {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 16px;
+
+    @media (max-width: 1024px) {
+      padding: 12px;
+    }
+
+    @media (max-width: 768px) {
+      padding: 8px;
+      flex-direction: column;
+    }
+  }
+
+  .question-panel {
+    position: relative;
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--neo-bg);
+
+    // SVG dot pattern background
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.5' fill='%23000000' opacity='0.50'/%3E%3C/svg%3E");
+      background-size: 20px 20px;
+      background-repeat: repeat;
+    }
+
+    // Ensure content is above background
+    > * {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  // Dark mode for question panel background
+  .dark .question-panel {
+    background: var(--neo-bg); // Use CSS variable for consistency
+
+    &::before {
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.5' fill='%23FFFFFF' opacity='0.50'/%3E%3C/svg%3E");
+    }
+  }
+
+  .media-mixer-display {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .media-mixer-display {
+    border-left: 5px solid var(--neo-black);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .function-call {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 50%;
+    overflow-y: auto;
+  }
+
+/* video player */
+.stream {
+  flex-grow: 1;
+  max-width: 90%;
+  border-radius: 32px;
+  max-height: fit-content;
+}
+
+.scratchpad-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+// Fix SettingsDialog overlap in grid layout
+.grid .settings-dialog {
+  display: block !important;
+  height: auto !important;
+  width: 100% !important;
+  align-items: unset !important;
+  justify-content: unset !important;
+  gap: 0 !important;
+  min-width: 0 !important;
+}

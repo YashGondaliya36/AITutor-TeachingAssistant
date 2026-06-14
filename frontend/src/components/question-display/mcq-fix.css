@@ -1,0 +1,67 @@
+/* MCQ Highlighting Fix - Override to ensure only selected option is highlighted */
+
+/* Prevent all choices from highlighting when one is clicked */
+:global(.framework-perseus) .choice {
+    /* Reset any global hover states that might affect all choices */
+    transition: background-color 0.15s ease;
+}
+
+/* Only highlight the actually selected choice */
+:global(.framework-perseus) .choice:has(> button[aria-pressed="true"]) {
+    /* Ensure selected state is visually distinct */
+    background-color: rgba(24, 101, 242, 0.08) !important;
+}
+
+/* Ensure hover only affects the hovered choice, not siblings */
+@media (hover: hover) {
+    :global(.framework-perseus) .choice:hover:not(:has(> button[aria-pressed="true"])) {
+        background-color: rgba(0, 0, 0, 0.04);
+    }
+}
+
+/* Fix: Prevent CSS from applying to all choices when one is selected */
+:global(.framework-perseus) .choice+.choice {
+    /* Ensure each choice is independent */
+    isolation: isolate;
+}
+
+/* Dark mode text color fix for question content */
+.dark #question-content-container,
+html.dark #question-content-container {
+    color: white;
+}
+
+/* Force Perseus text elements to use white text in dark mode */
+.dark #question-content-container .framework-perseus .paragraph,
+html.dark #question-content-container .framework-perseus .paragraph,
+.dark #question-content-container .framework-perseus div.paragraph,
+html.dark #question-content-container .framework-perseus div.paragraph,
+.dark #question-content-container .framework-perseus .perseus-renderer > .paragraph,
+html.dark #question-content-container .framework-perseus .perseus-renderer > .paragraph,
+.dark #question-content-container .framework-perseus .perseus-renderer > .paragraph .paragraph,
+html.dark #question-content-container .framework-perseus .perseus-renderer > .paragraph .paragraph {
+    color: white !important;
+}
+
+.dark #question-content-container .framework-perseus h1,
+html.dark #question-content-container .framework-perseus h1,
+.dark #question-content-container .framework-perseus h2,
+html.dark #question-content-container .framework-perseus h2,
+.dark #question-content-container .framework-perseus h3,
+html.dark #question-content-container .framework-perseus h3,
+.dark #question-content-container .framework-perseus h4,
+html.dark #question-content-container .framework-perseus h4 {
+    color: white !important;
+}
+
+.dark #question-content-container .framework-perseus .default-body-text,
+html.dark #question-content-container .framework-perseus .default-body-text {
+    color: white !important;
+}
+
+.dark #question-content-container .framework-perseus code,
+html.dark #question-content-container .framework-perseus code,
+.dark #question-content-container .framework-perseus pre,
+html.dark #question-content-container .framework-perseus pre {
+    color: white !important;
+}

@@ -1,0 +1,297 @@
+/* AI Chat Improvements - Adding tooltips and better UX */
+
+/* Tool explanations tooltip */
+.ai-tools-help {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ai-tools-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: nowrap;
+    z-index: 1000;
+    margin-bottom: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.ai-tools-help:hover .ai-tools-tooltip {
+    opacity: 1;
+}
+
+/* Arrow for tooltip */
+.ai-tools-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Available tools list */
+.available-tools-list {
+    background: hsl(0 0% 100%);
+    border: 1px solid hsl(214.3 31.8% 91.4%);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.available-tools-list h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: hsl(222.2 84% 4.9%);
+}
+
+.tool-item {
+    display: flex;
+    align-items: start;
+    gap: 12px;
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.tool-item:hover {
+    background: hsl(210 40% 96.1%);
+}
+
+.tool-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsl(221.2 83.2% 53.3%);
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.tool-info {
+    flex: 1;
+}
+
+.tool-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: hsl(222.2 84% 4.9%);
+    margin-bottom: 2px;
+}
+
+.tool-description {
+    font-size: 12px;
+    color: hsl(215.4 16.3% 46.9%);
+    line-height: 1.4;
+}
+
+/* Text input for AI chat */
+.ai-chat-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    background: hsl(0 0% 100%);
+    border-top: 1px solid hsl(214.3 31.8% 91.4%);
+}
+
+.ai-chat-input-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: end;
+}
+
+.ai-chat-textarea {
+    flex: 1;
+    min-height: 44px;
+    max-height: 120px;
+    padding: 12px;
+    border: 1px solid hsl(214.3 31.8% 91.4%);
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+    font-family: inherit;
+    background: hsl(0 0% 100%);
+    color: hsl(222.2 84% 4.9%);
+    transition: border-color 0.2s ease;
+}
+
+.ai-chat-textarea:focus {
+    outline: none;
+    border-color: hsl(221.2 83.2% 53.3%);
+    box-shadow: 0 0 0 3px hsla(221.2, 83.2%, 53.3%, 0.1);
+}
+
+.ai-chat-textarea::placeholder {
+    color: hsl(215.4 16.3% 46.9%);
+}
+
+.ai-chat-send-button {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsl(221.2 83.2% 53.3%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ai-chat-send-button:hover:not(:disabled) {
+    background: hsl(221.2 83.2% 45%);
+    transform: scale(1.05);
+}
+
+.ai-chat-send-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Voice/Text toggle */
+.input-mode-toggle {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background: hsl(210 40% 96.1%);
+    border-radius: 6px;
+}
+
+.input-mode-button {
+    flex: 1;
+    padding: 6px 12px;
+    border: none;
+    background: transparent;
+    color: hsl(215.4 16.3% 46.9%);
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.input-mode-button.active {
+    background: hsl(0 0% 100%);
+    color: hsl(222.2 84% 4.9%);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Help text */
+.ai-chat-help-text {
+    font-size: 11px;
+    color: hsl(215.4 16.3% 46.9%);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ai-chat-help-text .icon {
+    width: 14px;
+    height: 14px;
+}
+
+/* Keyboard shortcuts hint */
+.keyboard-hint {
+    font-size: 11px;
+    color: hsl(215.4 16.3% 46.9%);
+    padding: 4px 8px;
+    background: hsl(210 40% 96.1%);
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .ai-chat-input-container {
+        padding: 8px;
+    }
+
+    .ai-chat-textarea {
+        font-size: 16px;
+        /* Prevent zoom on iOS */
+    }
+
+    .available-tools-list {
+        padding: 12px;
+    }
+
+    .tool-item {
+        padding: 6px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .available-tools-list {
+        background: hsl(222.2 84% 4.9%);
+        border-color: hsl(217.2 32.6% 17.5%);
+    }
+
+    .available-tools-list h4,
+    .tool-name {
+        color: hsl(210 40% 98%);
+    }
+
+    .tool-description,
+    .ai-chat-help-text,
+    .keyboard-hint {
+        color: hsl(215 20.2% 65.1%);
+    }
+
+    .tool-item:hover {
+        background: hsl(217.2 32.6% 17.5%);
+    }
+
+    .ai-chat-input-container {
+        background: hsl(222.2 84% 4.9%);
+        border-top-color: hsl(217.2 32.6% 17.5%);
+    }
+
+    .ai-chat-textarea {
+        background: hsl(222.2 84% 4.9%);
+        border-color: hsl(217.2 32.6% 17.5%);
+        color: hsl(210 40% 98%);
+    }
+
+    .ai-chat-textarea::placeholder {
+        color: hsl(215 20.2% 65.1%);
+    }
+
+    .input-mode-toggle {
+        background: hsl(217.2 32.6% 17.5%);
+    }
+
+    .input-mode-button {
+        color: hsl(215 20.2% 65.1%);
+    }
+
+    .input-mode-button.active {
+        background: hsl(222.2 84% 4.9%);
+        color: hsl(210 40% 98%);
+    }
+
+    .keyboard-hint {
+        background: hsl(217.2 32.6% 17.5%);
+    }
+}

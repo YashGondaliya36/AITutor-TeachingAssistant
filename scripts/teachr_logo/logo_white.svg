@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 5 270 70" width="270" height="70">
+  <!-- teachr text - WHITE -->
+  <text
+    x="0"
+    y="62"
+    font-family="Rockwell, 'Arvo', 'Courier New', serif"
+    font-size="58"
+    font-weight="700"
+    fill="#ffffff"
+    letter-spacing="-1"
+  >teachr</text>
+
+  <!-- LIVE pill - WHITE -->
+  <rect
+    x="192"
+    y="38"
+    width="70"
+    height="25"
+    rx="8"
+    ry="8"
+    fill="#ffffff"
+  />
+
+  <!-- Live dot - RED -->
+  <circle
+    cx="206"
+    cy="51"
+    r="5"
+    fill="#ff0000"
+  />
+
+  <!-- LIVE text - BLACK (inverted) -->
+  <text
+    x="215"
+    y="56"
+    font-family="system-ui, -apple-system, sans-serif"
+    font-size="17"
+    font-weight="600"
+    fill="#1a1a1a"
+    letter-spacing="1"
+  >LIVE</text>
+</svg>
